@@ -1,13 +1,15 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import path from 'path';
+import path from 'path'
 import purgecssModule from '@fullhuman/postcss-purgecss'
+import tailwindcss from 'tailwindcss'
+import autoprefixer from 'autoprefixer'
 
 const purgecss = purgecssModule.default
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(),
+  plugins: [
+    vue(),
     purgecss({
       content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
       defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || []
@@ -16,8 +18,8 @@ export default defineConfig({
   css: {
     postcss: {
       plugins: [
-        require('tailwindcss'),
-        require('autoprefixer'),
+        tailwindcss,
+        autoprefixer,
       ],
     },
   },
@@ -28,10 +30,10 @@ export default defineConfig({
   },
   base: '/',
   build: {
-    outDir: 'dist', // natijaviy build uchun chiqish papkasi
+    outDir: 'dist',
     rollupOptions: {
       input: {
-        main: path.resolve(__dirname, 'index.html'), // kirish nuqtasi
+        main: path.resolve(__dirname, 'index.html'),
       },
     },
   }
